@@ -9,7 +9,8 @@ const SpillDetectScreen = ({ route }) => {
   const { incident } = route.params;
   
   const formatDate = (date) => {
-    return `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
+    const dt = new Date(date)
+    return `${dt.toLocaleDateString()} at ${dt.toLocaleTimeString()}`;
   };
 
   const acknowledgeIncident = () => {
@@ -97,8 +98,10 @@ const styles = StyleSheet.create({
   },
   spillImage: {
     width: '100%',
-    height: 200,
+    height: 250,
+    objectFit: 'fill',
     marginBottom: 16,
+    borderRadius: 4,
   },
   actionIcons: {
     flexDirection: 'row',

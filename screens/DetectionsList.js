@@ -7,28 +7,58 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
+  Button,
 } from "react-native";
 import { Avatar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 
 const incidents = [
   {
+    id: "3",
+    title: "Camera 1",
+    date: "2024-08-08T10:37:00Z",
+    time: "13:37",
+    imageUrl:
+      "https://live.staticflickr.com/65535/49431031126_3d33ee9895_b.jpg",
+  },
+  {
     id: "1",
-    title: "Spill detected on camera 1",
+    title: "Camera 1",
     time: "10:39",
     imageUrl:
-      "https://www.shutterstock.com/image-photo/coffee-spill-blue-cup-on-600nw-2225868539.jpg",
-    date: new Date("2024-08-08T10:39:22"),
+      "https://townsquare.media/site/48/files/2013/03/2013-03-11_19-59-24_38.jpg",
+    date: "2024-08-08T10:39:00",
   },
   {
     id: "2",
-    title: "Spill detected on camera 1",
+    title: "Camera 2",
     time: "10:37",
     imageUrl:
-      "https://media.istockphoto.com/id/1167989563/photo/coffee.jpg?s=612x612&w=0&k=20&c=rwu1w-KTztd7AtN57bTkJn2w5mxsgUnVUHYmmXTIh9M=",
-    date: new Date("2024-08-08T10:37:00"),
+      "https://media.istockphoto.com/id/916083808/photo/close-up.jpg?s=612x612&w=0&k=20&c=Ek55rfN6_d4rn8C9BrwfkUvGNenQBNi5S-EqjDUBQs0=",
+    date: "2024-08-08T10:37:00",
   },
 ];
+
+const sendPushNotification = async (expoPushToken) => {
+  const message = {
+    to: expoPushToken,
+    sound: 'default',
+    title: 'New Notification',
+    body: 'This is a test notification',
+    data: { incident: {
+      title: 'Notified Incident'
+    } },
+  };
+
+  await fetch('https://exp.host/--/api/v2/push/send', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(message),
+  });
+};
 
 const IncidentListScreen = () => {
   const navigation = useNavigation();
@@ -53,6 +83,7 @@ const IncidentListScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Open Incidents</Text>
+    
       <FlatList
         data={incidents}
         keyExtractor={(item) => item.id}
@@ -107,7 +138,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 200,
     objectFit: "cover",
-    borderRadius: 8,
+    borderRadius: 4,
   },
 });
 

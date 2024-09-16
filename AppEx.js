@@ -3,7 +3,6 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { View, Text, Image, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import { Avatar, Icon } from 'react-native-elements';  // For Avatar and Icons
-import { useNavigation } from '@react-navigation/native';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -39,10 +38,6 @@ function handleRegistrationError(errorMessage) {
 }
 
 export default function App() {
-  const navigation = useNavigation();
-  const date = new Date('2024-08-08T10:39:22');
-
-
   const [expoPushToken, setExpoPushToken] = useState("");
   const [channels, setChannels] = useState([]);
   const [notification, setNotification] = useState(undefined);
@@ -82,10 +77,6 @@ export default function App() {
     };
   }, []);
 
-  const formatDate = (date) => {
-    return `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`;
-  };
-
   return (
     <View
       style={{
@@ -94,18 +85,13 @@ export default function App() {
         justifyContent: "space-around",
       }}
     >
-     {/* Back Navigation */}
-     <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Text style={styles.backButton}>Back</Text>
-      </TouchableOpacity>
-      <Text style={styles.header}>SpillDetect</Text>
-      {/* <Text>Your expo push token: {expoPushToken}</Text> */}
+      <Text>Your expo push token: {expoPushToken}</Text>
       {/* <Text>{`Channels: ${JSON.stringify(
         channels.map((c) => c.id),
         null,
         2
       )}`}</Text> */}
-      {/* <View style={{ alignItems: "center", justifyContent: "center" }}>
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
         <Text>
           Title: {notification && notification.request.content.title}{" "}
         </Text>
@@ -114,7 +100,7 @@ export default function App() {
           Data:{" "}
           {notification && JSON.stringify(notification.request.content.data)}
         </Text>
-      </View> */}
+      </View>
       {/* <Button
         title="Press to schedule a notification"
         onPress={async () => {
@@ -127,34 +113,6 @@ export default function App() {
           await sendPushNotification(expoPushToken);
         }}
       /> */}
-      {/* Message Info */}
-      <View style={styles.messageContainer}>
-        {/* Avatar and Sender Info */}
-        <Avatar
-          rounded
-          title="S"
-          containerStyle={styles.avatar}
-        />
-        <View style={styles.messageInfo}>
-          <Text style={styles.sender}>SpillDetect</Text>
-          <Text style={styles.timestamp}>From SpillDetect on {formatDate(date)}</Text>
-        </View>
-      </View>
-
-      {/* Message Content */}
-      <Text style={styles.messageContent}>Spill detected on camera 1</Text>
-
-      {/* Image */}
-      <Image
-        source={{ uri: 'https://example.com/spill-image.png' }}  // Replace with actual image source
-        style={styles.spillImage}
-      />
-
-      {/* Action Icons */}
-      <View style={styles.actionIcons}>
-        <Icon name="share" type="feather" onPress={() => { /* Share action */ }} />
-        <Icon name="delete" type="feather" onPress={() => { /* Delete action */ }} />
-      </View>
     </View>
   );
 }

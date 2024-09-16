@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1036320801953",
-    "project_id": "react-native-sample-e92b6",
-    "storage_bucket": "react-native-sample-e92b6.appspot.com"
+    "project_number": "960167009767",
+    "project_id": "pn-react-native-f30fc",
+    "storage_bucket": "pn-react-native-f30fc.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1036320801953:android:40d9cca0d9451515ea5ce0",
+        "mobilesdk_app_id": "1:960167009767:android:c3e29f41eaced03f937142",
         "android_client_info": {
-          "package_name": "sample.app"
+          "package_name": "com.marinashafiq.sampleapp"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyANwvVvCXcWBE0ni51kONpHVeJCVFqu70A"
+          "current_key": "AIzaSyCKIwTqW2olFU44yXEniMKCmLEZ3v6tK2g"
         }
       ],
       "services": {
