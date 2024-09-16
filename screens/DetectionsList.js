@@ -1,4 +1,3 @@
-// IncidentListScreen.js
 import React from "react";
 import {
   View,
@@ -38,27 +37,6 @@ const incidents = [
     date: "2024-08-08T10:37:00",
   },
 ];
-
-const sendPushNotification = async (expoPushToken) => {
-  const message = {
-    to: expoPushToken,
-    sound: 'default',
-    title: 'New Notification',
-    body: 'This is a test notification',
-    data: { incident: {
-      title: 'Notified Incident'
-    } },
-  };
-
-  await fetch('https://exp.host/--/api/v2/push/send', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(message),
-  });
-};
 
 const IncidentListScreen = () => {
   const navigation = useNavigation();

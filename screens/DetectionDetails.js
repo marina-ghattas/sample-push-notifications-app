@@ -1,4 +1,3 @@
-// SpillDetectScreen.js
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet , Alert  } from 'react-native';
 import { Avatar } from 'react-native-elements';
@@ -24,10 +23,8 @@ const SpillDetectScreen = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       {/* <Text style={styles.header}>Incident Details</Text> */}
 
-      {/* Message Info */}
       <View style={styles.messageContainer}>
         <Avatar
           rounded
@@ -40,16 +37,13 @@ const SpillDetectScreen = ({ route }) => {
         </View>
       </View>
 
-      {/* Message Content */}
       <Text style={styles.messageContent}>{incident.title}</Text>
 
-      {/* Image */}
       <Image
         source={{ uri: incident.imageUrl }}
         style={styles.spillImage}
       />
 
-       {/* Acknowledge Button */}
        <TouchableOpacity style={styles.acknowledgeButton} onPress={acknowledgeIncident}>
         <Text style={styles.acknowledgeButtonText}>Acknowledge Incident</Text>
       </TouchableOpacity>

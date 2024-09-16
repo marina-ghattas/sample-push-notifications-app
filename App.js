@@ -1,4 +1,3 @@
-// App.js
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -7,7 +6,6 @@ import IncidentListScreen from "./screens/DetectionsList";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { Platform } from 'react-native';
-import { Button } from "react-native-elements";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
