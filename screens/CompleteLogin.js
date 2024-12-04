@@ -3,10 +3,15 @@ import * as Yup from "yup";
 import {
   Alert,
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   View,
 } from "react-native";
 
@@ -31,85 +36,98 @@ const CompleteLoginScreen = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image
-          source={require("../assets/icon.png")}
-          style={styles.logo}
-          resizeMode="contain"
-        />
-      </View>
-
-      <View style={styles.formContainer}>
-        <Text style={styles.title}>Login</Text>
-        <Text style={styles.subtitle}>
-          Please enter password for {email}
-        </Text>
-
-        <Formik
-          initialValues={{ password: "" }}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            values,
-            errors,
-            touched,
-          }) => (
-            <View style={styles.form}>
-              <TextInput
-                style={[
-                  styles.input,
-                  errors.password && touched.password
-                    ? styles.inputError
-                    : null,
-                ]}
-                placeholder="Password*"
-                placeholderTextColor="#aaa"
-                secureTextEntry
-                onChangeText={handleChange("password")}
-                onBlur={handleBlur("password")}
-                value={values.password}
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.innerContainer}>
+            {/* <View style={styles.logoContainer}>
+              <Image
+                source={require("../assets/icon.png")}
+                style={styles.logo}
+                resizeMode="contain"
               />
-              {errors.password && touched.password && (
-                <Text style={styles.errorText}>{errors.password}</Text>
-              )}
+            </View> */}
 
-              <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Submit</Text>
-              </TouchableOpacity>
+            <View style={styles.formContainer}>
+              <Text style={styles.title}>Enter password</Text>
+              <Text style={styles.subtitle}>
+                Please enter password for {email}
+              </Text>
+
+              <Formik
+                initialValues={{ password: "" }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  values,
+                  errors,
+                  touched,
+                }) => (
+                  <View style={styles.form}>
+                    <TextInput
+                      style={[
+                        styles.input,
+                        errors.password && touched.password
+                          ? styles.inputError
+                          : null,
+                      ]}
+                      placeholder="Password*"
+                      placeholderTextColor="#aaa"
+                      secureTextEntry
+                      onChangeText={handleChange("password")}
+                      onBlur={handleBlur("password")}
+                      value={values.password}
+                    />
+                    {errors.password && touched.password && (
+                      <Text style={styles.errorText}>{errors.password}</Text>
+                    )}
+
+                    <TouchableOpacity
+                      style={styles.button}
+                      onPress={handleSubmit}
+                    >
+                      <Text style={styles.buttonText}>Submit</Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </Formik>
             </View>
-          )}
-        </Formik>
-      </View>
-    </View>
+          </View>
+        </TouchableWithoutFeedback>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0f0f0",
+    backgroundColor: 'white',
     justifyContent: "center",
-    alignItems: "center",
   },
   logoContainer: {
     marginBottom: 20,
+    marginTop: 20,
   },
   logo: {
     width: 100,
     height: 50,
   },
   formContainer: {
-    width: "80%",
+    width: "100%",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#fff",
     borderRadius: 8,
     elevation: 4,
+    marginTop: "50%"
   },
   title: {
     fontSize: 20,
