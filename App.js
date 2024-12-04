@@ -1,11 +1,14 @@
-import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import SpillDetectScreen from "./screens/DetectionDetails"; // Import your screen component
-import IncidentListScreen from "./screens/DetectionsList";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
+import * as React from "react";
+
+import CompleteLoginScreen from "./screens/CompleteLogin";
+import IncidentListScreen from "./screens/DetectionsList";
+import Login from "./screens/Login";
+import { NavigationContainer } from "@react-navigation/native";
 import { Platform } from 'react-native';
+import SpillDetectScreen from "./screens/DetectionDetails"; // Import your screen component
+import { createStackNavigator } from "@react-navigation/stack";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -73,7 +76,9 @@ export default function App() {
 
   return (
     <NavigationContainer  ref={navigationRef}>
-      <Stack.Navigator initialRouteName="IncidentList">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="CompleteLoginScreen" component={CompleteLoginScreen} />
         <Stack.Screen name="IncidentList" component={IncidentListScreen} />
         <Stack.Screen name="SpillDetect" component={SpillDetectScreen} />
       </Stack.Navigator>
